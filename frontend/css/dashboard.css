@@ -1,0 +1,299 @@
+body {
+    background-image: url('../assets/crud.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 20px;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.dashboard-header h1 {
+    flex-shrink: 0;
+    margin: 0;
+    min-width: 140px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.user-info span {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.product-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px; 
+}
+
+.product-table th:nth-child(1),
+.product-table td:nth-child(1) { width: 50px; }
+
+.product-table th:nth-child(2),
+.product-table td:nth-child(2) { width: 200px; } 
+
+.product-table th:nth-child(4),
+.product-table td:nth-child(4) { width: 150px; }
+
+.product-table th:nth-child(5),
+.product-table td:nth-child(5) { 
+    width: 130px; 
+    text-align: center;
+}
+
+.product-table th:nth-child(6),
+.product-table td:nth-child(6) { 
+    width: 220px;
+    white-space: nowrap;
+}
+
+.product-table {
+    min-width: 600px;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-table th,
+.product-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.product-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.control-panel {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-toggle {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.dropdown-toggle:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-menu {
+    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.9); 
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.filtro-estado {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filtro-estado label {
+    font-weight: bold;
+}
+
+.filtro-estado select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.filtro-estado button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filtro-estado button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+    .dashboard-header h1 {
+        font-size: 20px;
+    }
+
+    .product-table th,
+    .product-table td {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .btn-sm {
+        padding: 4px 8px;
+        font-size: 12px;
+        margin: 2px;
+    }
+
+    .dropdown-toggle {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .filtro-estado {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filtro-estado select,
+    .filtro-estado button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .control-panel {
+        position: static;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-table {
+        min-width: 650px;
+    }
+    
+    .product-table th:nth-child(3),
+    .product-table td:nth-child(3) { 
+        display: none;
+    }
+    
+    .product-table td:nth-child(6) {
+        padding: 8px 4px;
+    }
+    
+    .product-table button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-header .d-flex {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .dashboard-header .btn,
+    .dropdown {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .dashboard-header h1 {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.dashboard-header .d-flex {
+    display: flex;
+    align-items: center; 
+    gap: 15px;
+    flex-wrap: nowrap;
+}

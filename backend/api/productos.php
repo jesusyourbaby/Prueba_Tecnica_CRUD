@@ -29,74 +29,76 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
         if (isset($_GET['id'])) {
-            $productoId = (int)$_GET['id'];
+            $tareaId = (int)$_GET['id'];
             $stmt = $conn->prepare("SELECT * FROM productos WHERE id = :id");
-            $stmt->execute(['id' => $productoId]);
-            $producto = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($producto) {
-                echo json_encode(value: $producto);
+            $stmt->execute(['id' => $tareaId]);
+            $tarea = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($tarea) {
+                echo json_encode($tarea);
             } else {
-                http_response_code(response_code: 404);
-                echo json_encode(value: ['error' => 'Producto no encontrado.']);
+                http_response_code(404);
+                echo json_encode(['error' => 'Tarea no encontrada.']);
             }
         } else {
             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 5;
             $offset = ($page - 1) * $limit;
-
+    
             if (isset($_GET['estado']) && $_GET['estado'] !== '') {
                 $estado = $_GET['estado'];
                 
                 $stmt = $conn->prepare("SELECT COUNT(*) as total FROM productos WHERE estado = :estado");
                 $stmt->execute(['estado' => $estado]);
-                $totalProductos = $stmt->fetchColumn();
-
+                $totalTareas = $stmt->fetchColumn();
+    
                 $stmt = $conn->prepare("SELECT * FROM productos WHERE estado = :estado LIMIT :limit OFFSET :offset");
                 $stmt->bindValue(':estado', $estado, PDO::PARAM_STR);
                 $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
                 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
                 $stmt->execute();
-                $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $tareas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             } else {
                 $stmt = $conn->query("SELECT COUNT(*) as total FROM productos");
-                $totalProductos = $stmt->fetchColumn();
-
+                $totalTareas = $stmt->fetchColumn();
+    
                 $stmt = $conn->prepare("SELECT * FROM productos LIMIT :limit OFFSET :offset");
                 $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
                 $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
                 $stmt->execute();
-                $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $tareas = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
-
-            echo json_encode(value: [
-                'productos' => $productos,
-                'total' => $totalProductos,
+    
+            echo json_encode([
+                'tareas' => $tareas,
+                'total' => $totalTareas,
             ]);
         }
         break;
+    
 
     case 'POST':
-        $data = json_decode(json: file_get_contents(filename: 'php://input'), associative: true);
-
+        $data = json_decode(file_get_contents('php://input'), true);
+    
+        // Validar que los campos obligatorios no estén vacíos
         if (empty($data['titulo'])) {
-            http_response_code(response_code: 400);
-            echo json_encode(value: ['error' => 'El título es obligatorio.']);
+            http_response_code(400);
+            echo json_encode(['error' => 'El título es obligatorio.']);
             exit;
         }
         if (empty($data['fecha_vencimiento'])) {
-            http_response_code(response_code: 400);
-            echo json_encode(value: ['error' => 'La fecha de vencimiento es obligatoria.']);
+            http_response_code(400);
+            echo json_encode(['error' => 'La fecha de vencimiento es obligatoria.']);
             exit;
         }
         if (empty($data['estado'])) {
-            http_response_code(response_code: 400);
-            echo json_encode(value: ['error' => 'El estado es obligatorio.']);
+            http_response_code(400);
+            echo json_encode(['error' => 'El estado es obligatorio.']);
             exit;
         }
-
+    
         $creadoPor = $decoded->email;
-
+    
         $stmt = $conn->prepare("INSERT INTO productos (titulo, descripcion, fecha_vencimiento, estado, creado_por) VALUES (:titulo, :descripcion, :fecha_vencimiento, :estado, :creado_por)");
         $stmt->execute([
             'titulo' => $data['titulo'],
@@ -105,15 +107,14 @@ switch ($method) {
             'estado' => $data['estado'],
             'creado_por' => $creadoPor
         ]);
-        echo json_encode(value: ['message' => 'Producto creado correctamente.']);
+        echo json_encode(['message' => 'La tarea ha sido creada correctamente.']);
         break;
 
     case 'PUT':
-        $data = json_decode(json: file_get_contents(filename: 'php://input'), associative: true);
-
+        $data = json_decode(file_get_contents('php://input'), true);
         if (empty($data['id']) || empty($data['titulo'])) {
-            http_response_code(response_code: 400);
-            echo json_encode(value: ['error' => 'El ID y el título son obligatorios.']);
+            http_response_code(400);
+            echo json_encode(['error' => 'El ID y el título son obligatorios.']);
             exit;
         }
 
@@ -125,30 +126,28 @@ switch ($method) {
             'fecha_vencimiento' => $data['fecha_vencimiento'] ?? null,
             'estado' => $data['estado'] ?? 'pendiente'
         ]);
-        echo json_encode(value: ['message' => 'Producto actualizado correctamente.']);
+        echo json_encode(['message' => 'La tarea ha sido actualizada correctamente.']);
         break;
 
     case 'DELETE':
-        // Eliminamos un producto o varios productos.
-        $data = json_decode(json: file_get_contents(filename: 'php://input'), associative: true);
-
+        $data = json_decode(file_get_contents('php://input'), true);
         if (isset($_GET['id'])) {
-            // Eliminar un solo producto.
+            // Eliminar un solo producto
             $tareaId = (int)$_GET['id'];
             $stmt = $conn->prepare("DELETE FROM productos WHERE id = :id");
-            $stmt->execute(['id' => $productoId]);
+            $stmt->execute(['id' => $tareaId]);
 
-            echo json_encode(value: ['message' => 'Producto eliminado correctamente.']);
+            echo json_encode(['message' => 'La tarea ha sido eliminada correctamente.']);
         } elseif (isset($data['ids'])) {
-            // Eliminar múltiples productos.
-            $ids = implode(separator: ',', array: array_map(callback: 'intval', array: $data['ids']));
+            // Eliminar múltiples productos
+            $ids = implode(',', array_map('intval', $data['ids']));
             $stmt = $conn->prepare("DELETE FROM productos WHERE id IN ($ids)");
             $stmt->execute();
 
-            echo json_encode(value: ['message' => 'Productos eliminados correctamente.']);
+            echo json_encode(['message' => 'Las tareas seleccionadas han sido eliminadas correctamente.']);
         } else {
-            http_response_code(response_code: 400);
-            echo json_encode(value: ['error' => 'Debes proporcionar un ID o una lista de IDs.']);
+            http_response_code(400);
+            echo json_encode(['error' => 'Debes proporcionar un ID o una lista de IDs.']);
         }
         break;
 }

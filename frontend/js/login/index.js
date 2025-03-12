@@ -25,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('http://localhost/PruebaCRUD/backend/api/auth.php', {
+    fetch('http://localhost/Prueba_Tecnica_CRUD/backend/api/auth.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
