@@ -1,0 +1,359 @@
+{
+	"info": {
+		"_postman_id": "a67ff0bb-494a-4b11-9ace-ba0ac837c5ea",
+		"name": "Prueba Tecnica CRUD Innovus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36501556"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Crear un Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/crear_admin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"Prueba_Tecnica_CRUD",
+								"backend",
+								"api",
+								"crear_admin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/auth_admin.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"Prueba_Tecnica_CRUD",
+								"backend",
+								"api",
+								"auth_admin.php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creación de usuarios rol Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZG1pbl9pZCI6MiwiZW1haWwiOiJlbGFkbWluQGV4YW1wbGUuY29tIiwiYWRtaW5pc3RyYWRvciI6MSwiZXhwIjoxNzQxODI3NDY4fQ.QxAw_GFXJVMvV_bKGvu8JJxbC_5HJE68iemo5b4g2F4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nuevo_usuario_desde_postman@example.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/crear_usuario.php",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"Prueba_Tecnica_CRUD",
+								"backend",
+								"api",
+								"crear_usuario.php"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login (Token)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jesus123@example.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/auth.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"auth.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Usuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"jesus777@example.com\",\r\n    \"password\": \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/register.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"register.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir Informacion (To-do List)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6Implc3VzaXZhbkBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTgxMDgyNH0.zDJHqRQudGXuwV1xFF1yRh6ZW40cDQ_2pZ9wTFtyngc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"Tarea de prueba 2\",\r\n  \"descripcion\": \"Esta es una tarea de prueba para verificar la API.\",\r\n  \"fecha_vencimiento\": \"2025-04-01\",\r\n  \"estado\": \"pendiente\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/productos.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"productos.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar informacion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6Implc3VzaXZhbkBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTgwOTkwNH0.Qk5pzGSQFqbu8hq5pyt4Lnk4ufGs_IWupRXkayz0hyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"titulo\": \"Tarea de prueba actualizada\",\r\n  \"descripcion\": \"Esta es una tarea de prueba para verificar la API. Y ha sido Actualizada\",\r\n  \"fecha_vencimiento\": \"2025-04-01\",\r\n  \"estado\": \"pendiente\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/productos.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"productos.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Informacion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6Implc3VzaXZhbkBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTgwOTkwNH0.Qk5pzGSQFqbu8hq5pyt4Lnk4ufGs_IWupRXkayz0hyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/productos.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"productos.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Visualizar Informacion To-do List",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJlbWFpbCI6Implc3VzaXZhbkBleGFtcGxlLmNvbSIsImV4cCI6MTc0MTgwOTkwNH0.Qk5pzGSQFqbu8hq5pyt4Lnk4ufGs_IWupRXkayz0hyM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/Prueba_Tecnica_CRUD/backend/api/productos.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Prueba_Tecnica_CRUD",
+						"backend",
+						"api",
+						"productos.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
