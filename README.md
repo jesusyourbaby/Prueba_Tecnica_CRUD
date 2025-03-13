@@ -3,3 +3,6 @@ Este proyecto es una prueba tecnica para el puesto de programador en Innovus Sof
 - Frontend: HTML, CSS, JavaScript, Bootstrap.
 - Backend: PHP (sin frameworks), MySQL.
 - Autenticacion: JWT
+
+Nombre: Jesus Ivan Moreira Loor
+Correo: ivanmoreiraloor2019@hotmail.com
